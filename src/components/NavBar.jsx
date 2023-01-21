@@ -29,7 +29,6 @@ const NavBar = () => {
     const handleResize = () => {
       setScreenSize(window.innerWidth);
       window.addEventListener('resize',handleResize)
-        console.log(window.innerWidth)
     }
 
     handleResize();
