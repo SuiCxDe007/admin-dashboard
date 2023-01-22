@@ -12,14 +12,11 @@ import {
     Stacked,
     Pyramid,
     Customers,
-    Kanban,
     Area,
     Bar,
     Pie,
     Financial,
-    ColorPicker,
     ColorMapping,
-    Editor,
     Line
 } from "./pages";
 
@@ -27,7 +24,7 @@ import './App.css';
 import {useStateContext} from "./contexts/ContextProvider";
 
 const App = () => {
-    const {  activeMenu } = useStateContext();
+    const {  activeMenu, themeSettings , setThemeSettings, currentColor } = useStateContext();
 
     return (
         <div>
@@ -36,8 +33,9 @@ const App = () => {
                     <div className="fixed right-4 bottom-4" style={{zIndex: "1000"}}>
                         <TooltipComponent content="Settings" position="top">
                             <button type="button"
+                                    onClick={() => setThemeSettings(true)}
                                     className="text-3x1 p-3 hover:drop-shadow-xl hover:bg-light-gray text-white"
-                                    style={{background: 'blue', borderRadius: '50%'}}>
+                                    style={{background: currentColor, borderRadius: '50%'}}>
                                 <FiSettings/>
                             </button>
                         </TooltipComponent>
@@ -58,6 +56,7 @@ const App = () => {
                         </div>
 
                     <div>
+                        {themeSettings && <ThemeSettings/>}
                         <Routes>
                             {/*    Dashboard   */}
                             <Route path="/" element={<Ecommerce/>}/>
@@ -67,10 +66,7 @@ const App = () => {
                             <Route path="/employees" element={<Employees/>}/>
                             <Route path="/customers" element={<Customers/>}/>
                             {/*  Apps  */}
-                            <Route path="/kanban" element={<Kanban/>}/>
-                            <Route path="/editor" element={<Editor/>}/>
                             <Route path="/calendar" element={<Calendar/>}/>
-                            <Route path="/color-picker" element={<ColorPicker/>}/>
                             {/*  Charts  */}
                             <Route path="/line" element={<Line/>}/>
                             <Route path="/area" element={<Area/>}/>
